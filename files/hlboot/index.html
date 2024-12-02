@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-files/hlboot" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">HashLink bytecode (and hlboot.dat) | Dead Cells Community Modding Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://n3rdl0rd.github.io/ModDocCE/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://n3rdl0rd.github.io/ModDocCE/img/social-card.png"><meta data-rh="true" property="og:url" content="https://n3rdl0rd.github.io/ModDocCE/files/hlboot"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="HashLink bytecode (and hlboot.dat) | Dead Cells Community Modding Docs"><meta data-rh="true" name="description" content="Based on the documentation at the excellent hlbc wiki, and improved with information from the development of the yet-to-be-released crashlink."><meta data-rh="true" property="og:description" content="Based on the documentation at the excellent hlbc wiki, and improved with information from the development of the yet-to-be-released crashlink."><link data-rh="true" rel="canonical" href="https://n3rdl0rd.github.io/ModDocCE/files/hlboot"><link data-rh="true" rel="alternate" href="https://n3rdl0rd.github.io/ModDocCE/files/hlboot" hreflang="en"><link data-rh="true" rel="alternate" href="https://n3rdl0rd.github.io/ModDocCE/files/hlboot" hreflang="x-default"><link rel="stylesheet" href="/ModDocCE/assets/css/styles.e478e7bb.css">
+<script src="/ModDocCE/assets/js/runtime~main.185df62d.js" defer="defer"></script>
+<script src="/ModDocCE/assets/js/main.c063047b.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/ModDocCE/"><b class="navbar__title text--truncate">ModDocCE</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/ModDocCE/">Home</a></div><div class="navbar__items navbar__items--right"><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite" aria-pressed="true"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/ModDocCE/">Home</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/ModDocCE/category/file-formats">File Formats</a><button aria-label="Collapse sidebar category &#x27;File Formats&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ModDocCE/files/pak">PAK files</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/ModDocCE/files/hlboot">HashLink bytecode (and hlboot.dat)</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/ModDocCE/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/ModDocCE/category/file-formats"><span itemprop="name">File Formats</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">HashLink bytecode (and hlboot.dat)</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>HashLink bytecode (and hlboot.dat)</h1></header>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Based on the documentation at the excellent <a href="https://github.com/Gui-Yom/hlbc/wiki/Bytecode-file-format" target="_blank" rel="noopener noreferrer">hlbc wiki</a>, and improved with information from the development of the yet-to-be-released <code>crashlink</code>.</p></div></div>
+<p>When compiling Haxe code for HashLink, the compiler generates a single binary file. The extension of such file is
+usually <code>.hl</code>, if the app is distributed with a HashLink vm, the bytecode file will be named <code>hlboot.dat</code> and will be
+found automatically by the main vm executable.</p>
+<p>The binary contains everything that&#x27;s needed to run which is data, type definitions and code. HashLink will generate
+native code for every function on startup (this is actually an AOT JIT if such term exists, everything gets compiled on
+startup, not lazily like on the JVM).</p>
+<p>The bytecode is entirely typed and contains definition for every possible type in the program (including primitives and
+function types). The code is register based per function, a function declares some typed registers to be used by the
+instructions.</p>
+<p>There are constant pools for signed integers, double precision floating point numbers, strings and bytes.</p>
+<p>The bytecode also optionally contains debug info like source file names, lines and variable assignments.</p>
+<p>Because most of the values in the structures are of variable size, it is impossible to know the position of anything
+without parsing the whole file beforehand.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="structures">Structures<a href="#structures" class="hash-link" aria-label="Direct link to Structures" title="Direct link to Structures">​</a></h2>
+<p><em>var</em> is a <a href="#variable-sized-integers">variable size integer</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="main-structure">Main structure<a href="#main-structure" class="hash-link" aria-label="Direct link to Main structure" title="Direct link to Main structure">​</a></h3>
+<table><thead><tr><th>size (bytes/struct)</th><th>name</th><th>description</th></tr></thead><tbody><tr><td>3</td><td><code>magic</code></td><td>&quot;HLB&quot;</td></tr><tr><td>1</td><td><code>version</code></td><td></td></tr><tr><td><em>var</em></td><td><code>flags</code></td><td>has debug info</td></tr><tr><td><em>var</em></td><td><code>nints</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nfloats</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nstrings</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nbytes</code></td><td>if version &gt;= 5</td></tr><tr><td><em>var</em></td><td><code>ntypes</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nglobals</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nnatives</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nfunctions</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nconstants</code></td><td>if version &gt;= 4</td></tr><tr><td><em>var</em></td><td><code>entrypoint</code></td><td>findex</td></tr><tr><td>4 * <code>nints</code></td><td><code>ints</code></td><td>i32 constant pool</td></tr><tr><td>8 * <code>nfloats</code></td><td><code>floats</code></td><td>f64 constant pool</td></tr><tr><td><a href="#strings-block"><strong>strings</strong></a></td><td><code>strings</code></td><td>string constant pool</td></tr><tr><td>4</td><td><code>bytes_size</code></td><td>amount to read for bytes data</td></tr><tr><td><code>bytes_size</code></td><td><code>bytes_data</code></td><td>byte strings data</td></tr><tr><td><em>var</em> * <code>nbytes</code></td><td><code>bytes_pos</code></td><td>pos of byte strings in <code>bytes_data</code></td></tr><tr><td>4</td><td><code>ndebugfiles</code></td><td>if has debug info, number of debug files entries</td></tr><tr><td><a href="#strings-block"><strong>strings</strong></a></td><td><code>debugfiles</code></td><td>if has debug info</td></tr><tr><td><code>ntypes</code> * <a href="#types"><strong>type</strong></a></td><td><code>types</code></td><td>types definitions</td></tr><tr><td><em>var</em> * <code>nglobals</code></td><td><code>globals</code></td><td>types of each globals</td></tr><tr><td><code>nnatives</code> * <a href="#natives"><strong>native</strong></a></td><td><code>natives</code></td><td>Native functions to be loaded from external libraries</td></tr><tr><td><code>nfunctions</code>* <a href="#functions"><strong>function</strong></a></td><td><code>functions</code></td><td>Function definitions</td></tr><tr><td><code>nconstants</code>* <a href="#constants"><strong>constant</strong></a></td><td><code>constants</code></td><td>Constant definitions</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="strings-block">Strings block<a href="#strings-block" class="hash-link" aria-label="Direct link to Strings block" title="Direct link to Strings block">​</a></h3>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td>4</td><td><code>strings_size</code></td><td>amount to read next</td></tr><tr><td><code>strings_size</code></td><td><code>strings_data</code></td><td>strings list, zero terminated strings</td></tr><tr><td><em>var</em> * <code>nstrings</code></td><td><code>strings_sizes</code></td><td>sizes of each string</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="types">Types<a href="#types" class="hash-link" aria-label="Direct link to Types" title="Direct link to Types">​</a></h3>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td>1</td><td><code>kind</code></td><td><a href="#type-kinds">type kind</a></td></tr><tr><td><em>?</em></td><td><code>definition</code></td><td>empty or some data based on the type kind</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="type-kinds">Type kinds<a href="#type-kinds" class="hash-link" aria-label="Direct link to Type kinds" title="Direct link to Type kinds">​</a></h4>
+<table><thead><tr><th>kind</th><th>name</th><th>description</th></tr></thead><tbody><tr><td>0</td><td>void</td><td><em>no data</em></td></tr><tr><td>1</td><td>u8</td><td><em>no data</em></td></tr><tr><td>2</td><td>u16</td><td><em>no data</em></td></tr><tr><td>3</td><td>i32</td><td><em>no data</em></td></tr><tr><td>4</td><td>i64</td><td><em>no data</em></td></tr><tr><td>5</td><td>f32</td><td><em>no data</em></td></tr><tr><td>6</td><td>f64</td><td><em>no data</em></td></tr><tr><td>7</td><td>bool</td><td><em>no data</em></td></tr><tr><td>8</td><td>bytes</td><td><em>no data</em></td></tr><tr><td>9</td><td>Dyn</td><td><em>no data</em>, dynamic type, can be anything</td></tr><tr><td>10</td><td><a href="#fun">Fun</a></td><td>function type / signature</td></tr><tr><td>11</td><td><a href="#obj">Obj</a></td><td>object type (haxe class)</td></tr><tr><td>12</td><td>Array</td><td><em>no data</em>, arrays are dynamic</td></tr><tr><td>13</td><td>Type</td><td><em>no data</em>, the Type type, for reflection</td></tr><tr><td>14</td><td><a href="#ref">Ref</a></td><td>reference</td></tr><tr><td>15</td><td><a href="#virtual">Virtual</a></td><td>like an anonymous class</td></tr><tr><td>16</td><td>DynObj</td><td><em>no data</em>, like Dyn but it is an object</td></tr><tr><td>17</td><td><a href="#abstract">Abstract</a></td><td>abstract class</td></tr><tr><td>18</td><td><a href="#enum">Enum</a></td><td>enum with its variants</td></tr><tr><td>19</td><td><a href="#null">Null</a></td><td>Can possibly be null type, types aren&#x27;t nullable by default</td></tr><tr><td>20</td><td><a href="#method">Method</a></td><td>like Fun, but different</td></tr><tr><td>21</td><td><a href="#struct">Struct</a></td><td>like Obj, but different</td></tr><tr><td>22</td><td><a href="#packed">Packed</a></td><td>Packs the inner structure</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="fun">Fun<a href="#fun" class="hash-link" aria-label="Direct link to Fun" title="Direct link to Fun">​</a></h4>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>nargs</code></td><td></td></tr><tr><td><em>var</em> * <code>nargs</code></td><td><code>args</code></td><td>type references of the function args</td></tr><tr><td><em>var</em></td><td><code>ret</code></td><td>return type</td></tr></tbody></table>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="function-names">Function names<a href="#function-names" class="hash-link" aria-label="Direct link to Function names" title="Direct link to Function names">​</a></h5>
+<p>As you can see, a function has no name. Its name can be inferred from where it is used though. They are bound as class
+methods (protos) or into class fields (bindings), so you can name them from that (after parsing the whole thing).</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="obj">Obj<a href="#obj" class="hash-link" aria-label="Direct link to Obj" title="Direct link to Obj">​</a></h4>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>name</code></td><td>string ref</td></tr><tr><td><em>var</em></td><td><code>super</code></td><td>type ref, supertype (can be &lt; 0, -&gt; no supertype)</td></tr><tr><td><em>var</em></td><td><code>global</code></td><td>global ref, global representing the static fields</td></tr><tr><td><em>var</em></td><td><code>nfields</code></td><td>number of fields</td></tr><tr><td><em>var</em></td><td><code>nprotos</code></td><td>number of methods</td></tr><tr><td><em>var</em></td><td><code>nbindings</code></td><td>number of field bindings</td></tr><tr><td><code>nfields</code> * <a href="#field"><strong>field</strong></a></td><td><code>fields</code></td><td>class fields</td></tr><tr><td><code>nprotos</code> * <a href="#proto"><strong>proto</strong></a></td><td><code>protos</code></td><td>class methods</td></tr><tr><td><code>nbindings</code> * <a href="#binding"><strong>binding</strong></a></td><td><code>protos</code></td><td>bindings between fields and functions (usually static functions)</td></tr></tbody></table>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="field">Field<a href="#field" class="hash-link" aria-label="Direct link to Field" title="Direct link to Field">​</a></h5>
+<p>Field definition for an Obj or a Virtual</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>name</code></td><td>string ref, name</td></tr><tr><td><em>var</em></td><td><code>type</code></td><td>type ref of the field</td></tr></tbody></table>
+<h6 class="anchor anchorWithStickyNavbar_LWe7" id="field-references">Field references<a href="#field-references" class="hash-link" aria-label="Direct link to Field references" title="Direct link to Field references">​</a></h6>
+<p>Fields references are positive numbers only valid in a given type hierarchy. They are the field index in an array of all
+the fields in the hierarchy in order. Example :</p>
+<div class="language-haxe codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-haxe codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">class A {</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  var a: Int;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">}</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">class B extends A {</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  var b: Int;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>In this example, the index of the field <code>b</code> is 1, while the index of <code>a</code> is 0.</p>
+<p>A consequence of this system is that you need to traverse the entire type hierarchy to gather all fields to know their indexes.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="proto">Proto<a href="#proto" class="hash-link" aria-label="Direct link to Proto" title="Direct link to Proto">​</a></h5>
+<p>A class instance method.</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>name</code></td><td>string ref, name</td></tr><tr><td><em>var</em></td><td><code>findex</code></td><td>global function index</td></tr><tr><td><em>var</em></td><td><code>pindex</code></td><td>?</td></tr></tbody></table>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="binding">Binding<a href="#binding" class="hash-link" aria-label="Direct link to Binding" title="Direct link to Binding">​</a></h5>
+<p>Binds a field to a function, usually for static functions or constructors.</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>field</code></td><td>field ref</td></tr><tr><td><em>var</em></td><td><code>findex</code></td><td>global function index</td></tr></tbody></table>
+<p>See <a href="#field-references">field references</a>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="ref">Ref<a href="#ref" class="hash-link" aria-label="Direct link to Ref" title="Direct link to Ref">​</a></h4>
+<p>The type of reference : Ref&lt;T&gt;. Same structure as other wrapper types.</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>type</code></td><td>type behind the reference</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="virtual">Virtual<a href="#virtual" class="hash-link" aria-label="Direct link to Virtual" title="Direct link to Virtual">​</a></h4>
+<p>An anonymous data class with fields.</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>nfields</code></td><td>number of fields</td></tr><tr><td><code>nfields</code> * <a href="#field"><strong>field</strong></a></td><td><code>fields</code></td><td>the fields</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="abstract">Abstract<a href="#abstract" class="hash-link" aria-label="Direct link to Abstract" title="Direct link to Abstract">​</a></h4>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>name</code></td><td>string ref</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="enum">Enum<a href="#enum" class="hash-link" aria-label="Direct link to Enum" title="Direct link to Enum">​</a></h4>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>name</code></td><td>string ref</td></tr><tr><td><em>var</em></td><td><code>global</code></td><td></td></tr><tr><td><em>var</em></td><td><code>nconstructs</code></td><td>number of constructs (variants)</td></tr></tbody></table>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="construct">Construct<a href="#construct" class="hash-link" aria-label="Direct link to Construct" title="Direct link to Construct">​</a></h5>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>name</code></td><td>string ref</td></tr><tr><td><em>var</em></td><td><code>nparams</code></td><td>number of parameters</td></tr><tr><td><em>var</em> * <code>nparams</code></td><td><code>params</code></td><td>type ref, parameters type</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="null">Null<a href="#null" class="hash-link" aria-label="Direct link to Null" title="Direct link to Null">​</a></h4>
+<p>Same structure as other wrapper types.</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>type</code></td><td>inner type</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="method">Method<a href="#method" class="hash-link" aria-label="Direct link to Method" title="Direct link to Method">​</a></h4>
+<p>Same structure as <a href="#fun">Fun</a>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="struct">Struct<a href="#struct" class="hash-link" aria-label="Direct link to Struct" title="Direct link to Struct">​</a></h4>
+<p>Same structure as <a href="#obj">Obj</a>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="packed">Packed<a href="#packed" class="hash-link" aria-label="Direct link to Packed" title="Direct link to Packed">​</a></h4>
+<p>Same structure as other wrapper types.</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>type</code></td><td>inner type</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="natives">Natives<a href="#natives" class="hash-link" aria-label="Direct link to Natives" title="Direct link to Natives">​</a></h3>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>lib</code></td><td>string ref, lib name</td></tr><tr><td><em>var</em></td><td><code>name</code></td><td>string ref, function name</td></tr><tr><td><em>var</em></td><td><code>type</code></td><td>type ref, function type</td></tr><tr><td><em>var</em></td><td><code>findex</code></td><td>global function index</td></tr></tbody></table>
+<p><code>lib</code> is the name of the external library to load. An exception is <code>std</code> which points directly to the standard library
+present in HashLink. If <code>lib</code> contains a <code>?</code>, it means the library is optional and can possibly not be present.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h3>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>type</code></td><td>type ref, function type</td></tr><tr><td><em>var</em></td><td><code>findex</code></td><td>global function index</td></tr><tr><td><em>var</em></td><td><code>nregs</code></td><td>number of registers</td></tr><tr><td><em>var</em></td><td><code>nops</code></td><td>number of instructions</td></tr><tr><td><em>var</em> * <code>nregs</code></td><td><code>regs</code></td><td>registers types</td></tr><tr><td><code>nops</code> * <a href="#opcodes"><strong>opcode</strong></a></td><td><code>ops</code></td><td>instructions</td></tr><tr><td><em>?</em> * <code>nops</code></td><td><code>debuginfo</code></td><td>if has debug info, complicated encoding for file/line info for each instruction</td></tr><tr><td><em>var</em></td><td><code>nassigns</code></td><td>if has debug info &amp;&amp; version &gt;= 3</td></tr><tr><td>2 <strong>var</strong> <code>nassigns</code></td><td><code>assigns</code></td><td>tuples (variable name ref, opcode number)</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="opcodes">Opcodes<a href="#opcodes" class="hash-link" aria-label="Direct link to Opcodes" title="Direct link to Opcodes">​</a></h3>
+<p>An opcode consists of a variable size integer for the opcode index and a piece of data for each argument, determined by the argument type. Here is a list of all opcodes:</p>
+<p>Basic Operations:</p>
+<ul>
+<li>Mov: Copy value from src into dst register (dst = src)</li>
+<li>Int: Load i32 constant from pool into dst (dst = @ptr)</li>
+<li>Float: Load f64 constant from pool into dst (dst = @ptr)</li>
+<li>Bool: Set boolean value in dst (dst = true/false)</li>
+<li>Bytes: Load byte array from constant pool into dst (dst = @ptr)</li>
+<li>String: Load string from constant pool into dst (dst = @ptr)</li>
+<li>Null: Set dst register to null (dst = null)</li>
+</ul>
+<p>Arithmetic:</p>
+<ul>
+<li>Add: Add two numbers (dst = a + b)</li>
+<li>Sub: Subtract two numbers (dst = a - b)</li>
+<li>Mul: Multiply two numbers (dst = a * b)</li>
+<li>SDiv: Signed division (dst = a / b)</li>
+<li>UDiv: Unsigned division (dst = a / b)</li>
+<li>SMod: Signed modulo (dst = a % b)</li>
+<li>UMod: Unsigned modulo (dst = a % b)</li>
+</ul>
+<p>Bitwise:</p>
+<ul>
+<li>Shl: Left shift (dst = a &lt;&lt; b)</li>
+<li>SShr: Signed right shift (dst = a &gt;&gt; b)</li>
+<li>UShr: Unsigned right shift (dst = a &gt;&gt;&gt; b)</li>
+<li>And: Bitwise AND (dst = a &amp; b)</li>
+<li>Or: Bitwise OR (dst = a | b)</li>
+<li>Xor: Bitwise XOR (dst = a ^ b)</li>
+<li>Neg: Negate value (dst = -src)</li>
+<li>Not: Boolean NOT (dst = !src)</li>
+</ul>
+<p>Increment/Decrement:</p>
+<ul>
+<li>Incr: Increment value (dst++)</li>
+<li>Decr: Decrement value (dst--)</li>
+</ul>
+<p>Function Calls:</p>
+<ul>
+<li>Call0: Call function with no args (dst = fun())</li>
+<li>Call1: Call function with 1 arg (dst = fun(arg0))</li>
+<li>Call2: Call function with 2 args (dst = fun(arg0, arg1))</li>
+<li>Call3: Call function with 3 args (dst = fun(arg0, arg1, arg2))</li>
+<li>Call4: Call function with 4 args (dst = fun(arg0, arg1, arg2, arg3))</li>
+<li>CallN: Call function with N args (dst = fun(args...))</li>
+<li>CallMethod: Call method with N args (dst = obj.field(args...))</li>
+<li>CallThis: Call this method with N args (dst = this.field(args...))</li>
+<li>CallClosure: Call closure with N args (dst = fun(args...))</li>
+</ul>
+<p>Closures:</p>
+<ul>
+<li>StaticClosure: Create closure from function (dst = fun)</li>
+<li>InstanceClosure: Create closure from object method (dst = obj.fun)</li>
+<li>VirtualClosure: Create closure from object field (dst = obj.field)</li>
+</ul>
+<p>Global Variables:</p>
+<ul>
+<li>GetGlobal: Get global value (dst = @global)</li>
+<li>SetGlobal: Set global value (@global = src)</li>
+</ul>
+<p>Fields:</p>
+<ul>
+<li>Field: Get object field (dst = obj.field)</li>
+<li>SetField: Set object field (obj.field = src)</li>
+<li>GetThis: Get this field (dst = this.field)</li>
+<li>SetThis: Set this field (this.field = src)</li>
+<li>DynGet: Get dynamic field (dst = obj[field])</li>
+<li>DynSet: Set dynamic field (obj[field] = src)</li>
+</ul>
+<p>Control Flow:</p>
+<ul>
+<li>JTrue: Jump if true (if cond jump by offset)</li>
+<li>JFalse: Jump if false (if !cond jump by offset)</li>
+<li>JNull: Jump if null (if reg == null jump by offset)</li>
+<li>JNotNull: Jump if not null (if reg != null jump by offset)</li>
+<li>JSLt/JSGte/JSGt/JSLte: Signed comparison jumps</li>
+<li>JULt/JUGte: Unsigned comparison jumps</li>
+<li>JNotLt/JNotGte: Negated comparison jumps</li>
+<li>JEq: Jump if equal (if a == b jump by offset)</li>
+<li>JNotEq: Jump if not equal (if a != b jump by offset)</li>
+<li>JAlways: Unconditional jump</li>
+<li>Label: Target for backward jumps (loops)</li>
+<li>Switch: Multi-way branch based on integer value</li>
+</ul>
+<p>Type Conversions:</p>
+<ul>
+<li>ToDyn: Convert to dynamic type (dst = (dyn)src)</li>
+<li>ToSFloat: Convert to signed float (dst = (float)src)</li>
+<li>ToUFloat: Convert to unsigned float (dst = (float)src)</li>
+<li>ToInt: Convert to int (dst = (int)src)</li>
+<li>SafeCast: Safe type cast with runtime check</li>
+<li>UnsafeCast: Unchecked type cast</li>
+<li>ToVirtual: Convert to virtual type</li>
+</ul>
+<p>Exception Handling:</p>
+<ul>
+<li>Ret: Return from function (return ret)</li>
+<li>Throw: Throw exception</li>
+<li>Rethrow: Rethrow exception</li>
+<li>Trap: Setup try-catch block</li>
+<li>EndTrap: End try-catch block</li>
+<li>NullCheck: Throw if null (if reg == null throw)</li>
+</ul>
+<p>Memory Operations:</p>
+<ul>
+<li>GetI8: Read i8 from bytes (dst = bytes[index])</li>
+<li>GetI16: Read i16 from bytes (dst = bytes[index])</li>
+<li>GetMem: Read from memory (dst = bytes[index])</li>
+<li>GetArray: Get array element (dst = array[index])</li>
+<li>SetI8: Write i8 to bytes (bytes[index] = src)</li>
+<li>SetI16: Write i16 to bytes (bytes[index] = src)</li>
+<li>SetMem: Write to memory (bytes[index] = src)</li>
+<li>SetArray: Set array element (array[index] = src)</li>
+</ul>
+<p>Objects:</p>
+<ul>
+<li>New: Allocate new object (dst = new typeof(dst))</li>
+<li>ArraySize: Get array length (dst = len(array))</li>
+<li>Type: Get type object (dst = type ty)</li>
+<li>GetType: Get value&#x27;s type (dst = typeof src)</li>
+<li>GetTID: Get type ID (dst = typeof src)</li>
+</ul>
+<p>References:</p>
+<ul>
+<li>Ref: Create reference (dst = &amp;src)</li>
+<li>Unref: Read reference (dst = *src)</li>
+<li>Setref: Write reference (*dst = src)</li>
+<li>RefData: Get reference data</li>
+<li>RefOffset: Get reference with offset</li>
+</ul>
+<p>Enums:</p>
+<ul>
+<li>MakeEnum: Create enum variant (dst = construct(args...))</li>
+<li>EnumAlloc: Create enum with defaults (dst = construct())</li>
+<li>EnumIndex: Get enum tag (dst = variant of value)</li>
+<li>EnumField: Get enum field (dst = (value as construct).field)</li>
+<li>SetEnumField: Set enum field (value.field = src)</li>
+</ul>
+<p>Other:</p>
+<ul>
+<li>Assert: Debug break</li>
+<li>Nop: No operation</li>
+<li>Prefetch: CPU memory prefetch hint</li>
+<li>Asm: Inline x86 assembly</li>
+</ul>
+<p>Opcodes can have one of the following argument types:</p>
+<ul>
+<li>Reg: Register index (VarInt)</li>
+<li>Regs: Register indexes (VarInt for count, followed by count VarInts)</li>
+<li>RefInt: i32 constant index (VarInt)</li>
+<li>RefFloat: f64 constant index (VarInt)</li>
+<li>InlineBool: Boolean value - 0 or 1 (VarInt)</li>
+<li>RefBytes: Byte array constant index (VarInt)</li>
+<li>RefString: String constant index (VarInt)</li>
+<li>RefFun: Function index (VarInt)</li>
+<li>RefField: Field index (VarInt)</li>
+<li>RefGlobal: Global index (VarInt)</li>
+<li>JumpOffset: Jump offset (VarInt)</li>
+<li>JumpOffsets: Jump offsets (VarInt for count, followed by count VarInts)</li>
+<li>RefType: Type index (VarInt)</li>
+<li>RefEnumConstant: Enum constant index (VarInt)</li>
+<li>RefEnumConstruct: Enum construct index (VarInt)</li>
+<li>InlineInt: Inline integer value (VarInt)</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="jump-offsets">Jump offsets<a href="#jump-offsets" class="hash-link" aria-label="Direct link to Jump offsets" title="Direct link to Jump offsets">​</a></h4>
+<p>Jump offsets counts the number of instructions to jump (not the bytes). They may be negative for a backward jump, in
+this case, they always target a <code>Label</code> instruction.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="constants">Constants<a href="#constants" class="hash-link" aria-label="Direct link to Constants" title="Direct link to Constants">​</a></h3>
+<p>Constants are used to initialize globals without code.</p>
+<table><thead><tr><th>size</th><th>name</th><th>description</th></tr></thead><tbody><tr><td><em>var</em></td><td><code>global</code></td><td>global to initialize</td></tr><tr><td><em>var</em></td><td><code>nfields</code></td><td>number of fields</td></tr><tr><td><em>var</em></td><td><code>fields</code></td><td>field initializers</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="about-bytecode-data-types">About bytecode data types<a href="#about-bytecode-data-types" class="hash-link" aria-label="Direct link to About bytecode data types" title="Direct link to About bytecode data types">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="variable-sized-integers">Variable sized integers<a href="#variable-sized-integers" class="hash-link" aria-label="Direct link to Variable sized integers" title="Direct link to Variable sized integers">​</a></h3>
+<p>Since much of the linking in the bytecode happens with integer indexes, most of the integers are encoded in a variable
+byte size format spanning 1, 2 or 4 bytes (<em>var</em>). This was probably done to save space. You can find an example on how
+to
+decode one <a href="https://github.com/Gui-Yom/hlbc/blob/71212fa56cf52e4688e0468b8340a9e7f4bb6d6d/src/deser.rs#L41" target="_blank" rel="noopener noreferrer">here</a> and to
+encode one <a href="https://github.com/Gui-Yom/hlbc/blob/71212fa56cf52e4688e0468b8340a9e7f4bb6d6d/src/ser.rs#L33" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="function-indexes">Function indexes<a href="#function-indexes" class="hash-link" aria-label="Direct link to Function indexes" title="Direct link to Function indexes">​</a></h3>
+<p>A function reference is a function index (findex) but unlike other indexes it does not reference a function in the pool
+directly, as natives and functions share the findex space. We need to parse the whole file to map findexes to regular
+function or native indexes.</p></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/ModDocCE/files/pak"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">PAK files</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#structures" class="table-of-contents__link toc-highlight">Structures</a><ul><li><a href="#main-structure" class="table-of-contents__link toc-highlight">Main structure</a></li><li><a href="#strings-block" class="table-of-contents__link toc-highlight">Strings block</a></li><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#natives" class="table-of-contents__link toc-highlight">Natives</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a></li><li><a href="#opcodes" class="table-of-contents__link toc-highlight">Opcodes</a></li><li><a href="#constants" class="table-of-contents__link toc-highlight">Constants</a></li></ul></li><li><a href="#about-bytecode-data-types" class="table-of-contents__link toc-highlight">About bytecode data types</a><ul><li><a href="#variable-sized-integers" class="table-of-contents__link toc-highlight">Variable sized integers</a></li><li><a href="#function-indexes" class="table-of-contents__link toc-highlight">Function indexes</a></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
+</body>
+</html>
