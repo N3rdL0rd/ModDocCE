@@ -6,7 +6,7 @@ sidebar_position: 2
 
 :::note
 
-Based on the documentation at the excellent [hlbc wiki](https://github.com/Gui-Yom/hlbc/wiki/Bytecode-file-format), and improved with information from the development of the yet-to-be-released `crashlink`.
+Based on the documentation at the excellent [hlbc wiki](https://github.com/Gui-Yom/hlbc/wiki/Bytecode-file-format), and improved with information from the development of [crashlink](https://github.com/N3rdL0rd/crashlink).
 
 :::
 
@@ -469,3 +469,9 @@ encode one [here](https://github.com/Gui-Yom/hlbc/blob/71212fa56cf52e4688e0468b8
 A function reference is a function index (findex) but unlike other indexes it does not reference a function in the pool
 directly, as natives and functions share the findex space. We need to parse the whole file to map findexes to regular
 function or native indexes.
+
+## See also
+
+- [hlbc](https://github.com/Gui-Yom/hlbc)
+- [crashlink](https://github.com/N3rdL0rd/crashlink)
+- [Using crashlink](/tutorials/crashlink)
