@@ -8,7 +8,7 @@ crashlink is a new HashLink bytecode Swiss Army knife that allows you to easily 
 - An Internet connection
 - A Python installation (3.10+)
 
-## Installin
+## Installing
 
 **If you're using `uv`:**
 
@@ -19,7 +19,7 @@ uv pip install --system crashlink[extras]
 **Otherwise:**
 
 ```bash
-pip isntall crashlink[extras]
+pip install crashlink[extras]
 ```
 
 **Or, for a bleeding edge (potentially untested!) install:**
