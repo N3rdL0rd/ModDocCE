@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Using crashlink
 
 crashlink is a new HashLink bytecode Swiss Army knife that allows you to easily (and programatically) load, save, modify, patch, decompile, and otherwise poke at compiled Haxe in HashLink. This page serves as a brief overview of how to install, run, and use crashlink intuitively on your computer.
@@ -36,7 +40,7 @@ uv pip install --system git+https://github.com/N3rdL0rd/crashlink[extras]
 crashlink "C:\Path\To\Dead Cells\deadcells.exe"
 ```
 
-**On *nix and MacOS:**
+**On \*nix and MacOS:**
 
 ```bash
 crashlink "/path/to/Dead Cells/hlboot.dat"
