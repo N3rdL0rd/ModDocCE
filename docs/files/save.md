@@ -29,7 +29,7 @@ A working example of reading and writing a Dead Cells save file is available in 
 | 59           | Header         | [Header](#header) |
 | Variable     | Payload        | [Payload](#payload) |
 
-### Header
+### Header (PC version)
 
 | Size (bytes) | Name           | Description                                        | Struct            |
 |--------------|----------------|----------------------------------------------------|-------------------|
@@ -37,7 +37,18 @@ A working example of reading and writing a Dead Cells save file is available in 
 | 1            | Version        | Current format version, usually `1`                | Unsigned 8-bit integer |
 | 20           | Checksum       | SHA-1 raw hex digest of the file's contents, assuming these 20 bytes are 0x0 while taking the hash | None |
 | 20           | Git hash       | Current long commit hash of the game, as a hex digest | None |
-| 10            | Build date     | Build date of the game version creating this save file | UTF-8 string |
+| 10           | Build date     | Build date of the game version creating this save file | UTF-8 string |
+| 4            | Flags          | Flags and metadata about the save file - mostly unknown | Flags |
+
+### Header (mobile version)
+
+| Size (bytes) | Name           | Description                                        | Struct            |
+|--------------|----------------|----------------------------------------------------|-------------------|
+| 4            | Magic          | `0x20DEAD19`                                       | None              |
+| 1            | Version        | Current format version, usually `2`                | Unsigned 8-bit integer |
+| 20           | Checksum       | SHA-1 raw hex digest of the file's contents, assuming these 20 bytes are 0x0 while taking the hash | None |
+| 20           | Git hash       | A value for each major version of the game, currently `0000DEADCE110000000000000000000300500000` | None |
+| 10           | Build date     | Build date of the game version creating this save file | UTF-8 string |
 | 4            | Flags          | Flags and metadata about the save file - mostly unknown | Flags |
 
 ### Flags
@@ -97,3 +108,9 @@ Depending on what kind of data chunk you're reading, the format of its chunk in 
 ## hxbit Data
 
 This data is serialised with help from [hxbit](https://github.com/HeapsIO/hxbit) - a Haxe library that enables serialisation of arbitrary objects to binary representations. This has yet to be reversed, but if it were able to be, it would be the key to actually modifying save files.
+
+## Additional notes about saves from the mobile version
+
+The chunks `S_Game` and `S_UserAndGameData` cannot be copied from a PC save to a mobile save, because mobile has no implementation of the Twitch integration features; those Twitch features are always referenced in those two chunks on a PC save even when they have not been activated, leading to a crash when trying to pass them on the mobile version.
+
+However, the `S_User` chunk, which contains the meta progress of the save (including unlocked items), can be passed from a PC save to a mobile save.
