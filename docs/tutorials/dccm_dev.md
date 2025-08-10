@@ -38,7 +38,7 @@ Open up your game directory in your favorite file explorer. Then, go download th
 
 Make a subdirectory in the root of your game directory - call it `coremod`. Unzip the contents of the DCCM release to that directory. It should look like:
 
-```
+```txt
 <DeadCellsGameRoot>
 ├─ coremod
 │  ├─ core
@@ -77,7 +77,7 @@ When you launch the game, you should see a new menu item labeled "About Core Mod
 Let's install the SDK now! Open ***Powershell*** (Note: it needs to be Powershell and not `cmd.exe`!) in the game directory and run:
 
 ```ps1
-cd coremode\core\mdk\
+cd coremod\core\mdk\
 .\install.ps1
 ```
 

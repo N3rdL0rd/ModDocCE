@@ -16,7 +16,7 @@ Open up your game directory in your favorite file explorer. Then, go download th
 
 Make a subdirectory in the root of your game directory - call it `coremod`. Unzip the contents of the DCCM release to that directory. It should look like:
 
-```
+```txt
 <DeadCellsGameRoot>
 ├─ coremod
 │  ├─ core
@@ -54,4 +54,4 @@ When you launch the game, you should see a new menu item labeled "About Core Mod
 
 ## Installing Mods
 
-Follow [the official docs](https://dead-cells-core-modding.github.io/docs-en/docs/dev/tutorial/first-mod/).
+Follow [the official docs](https://dead-cells-core-modding.github.io/docs-en/docs/tutorial/install-mods/).
