@@ -89,4 +89,4 @@ Package source with Name: DeadCoreModdingMDK added successfully.
 
 ## Developing Mods
 
-TODO!
+You should read [the official docs](https://dead-cells-core-modding.github.io/docs-en/docs/category/writing-your-first-mod/) for this one ;)

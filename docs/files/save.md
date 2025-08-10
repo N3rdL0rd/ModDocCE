@@ -14,7 +14,7 @@ All this information was obtained from `f@34927 static tool.$Save.genSave (User,
 
 :::warning
 
-This is not complete! We still need to figure out how hxbit actually stores its data, and until then, save files can only be partially modified.
+This is not complete! Although a partial reimplementation of hxbit is available in [hxbit.py](https://github.com/N3rdL0rd/hxbit.py), this can only read - **not write** - save file data.
 
 :::
 
@@ -107,7 +107,9 @@ Depending on what kind of data chunk you're reading, the format of its chunk in 
 
 ## hxbit Data
 
-This data is serialised with help from [hxbit](https://github.com/HeapsIO/hxbit) - a Haxe library that enables serialisation of arbitrary objects to binary representations. This has yet to be reversed, but if it were able to be, it would be the key to actually modifying save files.
+This data is serialised with help from [hxbit](https://github.com/HeapsIO/hxbit) - a Haxe library that enables serialisation of arbitrary objects to binary representations. This format has been partially reversed in [hxbit.py](https://github.com/N3rdL0rd/hxbit.py).
+
+See the [full page](./hxbit) for format specs.
 
 ## Additional notes about saves from the mobile version
 

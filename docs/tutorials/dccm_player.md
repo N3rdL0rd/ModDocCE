@@ -54,4 +54,4 @@ When you launch the game, you should see a new menu item labeled "About Core Mod
 
 ## Installing Mods
 
-TODO
+Follow [the official docs](https://dead-cells-core-modding.github.io/docs-en/docs/dev/tutorial/first-mod/).
