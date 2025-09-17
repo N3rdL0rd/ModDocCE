@@ -35,16 +35,43 @@ If you're a REHex user, you can download a fully commented out example PAK file 
 
 ### Entry
 
-| Size (bytes) | Name           | Description                                                   | Struct                 | Condition                |
-|--------------|----------------|---------------------------------------------------------------|------------------------|--------------------------|
-| 1            | Name length    | Length of the entry name                                      | Unsigned byte          | None                     |
-| Variable     | Name           | Name of the entry                                             | ASCII-encoded text     | Name length > 0          |
-| 1            | Type           | 0x00 for file, 0x01 for directory                             | Unsigned byte          | None                     |
-| 4            | Entry count    | Number of entries in the directory                            | Signed 32-bit int      | Type == 0x01 (Directory) |
-| Variable     | Entries        | Recursive Entry structures for directory contents             | [Entry](#entry)        | Type == 0x01 (Directory) |
-| 4            | Position       | Offset of the file data from the start of the data section    | Signed 32-bit int      | Type == 0x00 (File)      |
-| 4            | Size           | Size of the file data in bytes                                | Signed 32-bit int      | Type == 0x00 (File)      |
-| 4            | Checksum       | Adler32 checksum of the file data                             | Signed 32-bit int      | Type == 0x00 (File)      |
+An Entry can either be a directory or a file, determined by its `Flags`.
+
+| Size (bytes) | Name          | Description                               | Struct        |
+| :----------- | :------------ | :---------------------------------------- | :------------ |
+| 1            | Name length   | The number of characters in the name.     | Unsigned byte |
+| Variable     | Name          | The name of the entry.                    | ASCII text    |
+| 1            | Flags         | Bit flags that determine the entry type.  | Unsigned byte |
+
+The `Flags` field is a bitmask that specifies the properties of the entry:
+
+* **`&0x01`**: If this bit is set, the entry is a **directory**.
+* **`&0x02`**: If this bit is set, the `Position` of the file data is represented as a 64-bit long integer.
+
+:::note
+
+The `0x02` flag cannot generally be found in Dead Cells on any platforms - but it exists here for completeness of the format. Dead Cells also does not handle deserialising this flag, but other Heaps games (such as Wartales) generate such PAKs.
+
+:::
+
+---
+
+#### If the entry is a directory
+
+| Size (bytes) | Name        | Description                                       | Struct            |
+| :----------- | :---------- | :------------------------------------------------ | :---------------- |
+| 4            | Entry count | The number of entries inside this directory.      | Signed 32-bit int |
+| Variable     | Entries     | A recursive list of `Entry` structures.           | [Entry](#entry)   |
+
+---
+
+#### If the entry is a file
+
+| Size (bytes) | Name     | Description                                                                                             | Struct                         |
+| :----------- | :------- | :------------------------------------------------------------------------------------------------------ | :----------------------------- |
+| 4 or 8       | Position | The offset of the file data from the start of the data section. It is a 64-bit `long` if the `&0x02` flag is set; otherwise, it is a 32-bit `int`. | Signed 32-bit int or 64-bit long |
+| 4            | Size     | The size of the file data in bytes.                                                                     | Signed 32-bit int              |
+| 4            | Checksum | The Adler32 checksum of the file data.                                                                  | Signed 32-bit int              |
 
 ### DATA marker
 
