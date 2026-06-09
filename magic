@@ -1,0 +1,29 @@
+# Dead Cells / Heaps.IO engine file format magic definitions
+# Usage: file -m magic <file>
+
+# PAK archive (Heaps.IO games)
+# Magic: ASCII "PAK" at offset 0, followed by a 1-byte version
+0       string  PAK             Heaps.IO PAK archive
+>3      byte    0               \b, v0 (no stamp)
+>3      byte    1               \b, v1 (stamped)
+
+# HashLink bytecode (.hl / hlboot.dat)
+# Magic: ASCII "HLB" at offset 0, followed by a 1-byte version
+0       string  HLB             HashLink bytecode
+>3      byte    x               \b, version %d
+
+# hxbit serialized data (.hxs)
+# The "magic" is the string "HXS" encoded using the HXS String type:
+# byte 0 = 0x04 (VarInt for length+1, i.e. len("HXS")+1=4), bytes 1-3 = "HXS", byte 4 = version
+0       string  \004HXS         hxbit serialized data
+>4      byte    x               \b, version %d
+
+# Dead Cells save file (PC)
+# Magic: 0xDEADCE11 (big-endian) at offset 0, followed by a 1-byte format version
+0       belong  0xDEADCE11      Dead Cells save file (PC)
+>4      byte    x               \b, format version %d
+
+# Dead Cells save file (mobile)
+# Magic: 0x20DEAD19 (big-endian) at offset 0, followed by a 1-byte format version
+0       belong  0x20DEAD19      Dead Cells save file (mobile)
+>4      byte    x               \b, format version %d

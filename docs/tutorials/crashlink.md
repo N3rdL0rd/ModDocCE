@@ -10,26 +10,22 @@ crashlink is a new HashLink bytecode Swiss Army knife that allows you to easily 
 
 - A computer
 - An Internet connection
-- A Python installation (3.10+)
+- A Python installation (3.10+), or [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
 
 ## Installing
 
-**If you're using `uv`:**
+**If you're using `uv`:** (Highly recommended)
 
 ```bash
-uv pip install --system crashlink[extras]
+uv tool install crashlink[extras]
+# or, for ToT
+# uv tool install git+https://github.com/N3rdL0rd/crashlink[extras]
 ```
 
 **Otherwise:**
 
 ```bash
 pip install crashlink[extras]
-```
-
-**Or, for a bleeding edge (potentially untested!) install:**
-
-```bash
-uv pip install --system git+https://github.com/N3rdL0rd/crashlink[extras]
 ```
 
 ## Loading the game
