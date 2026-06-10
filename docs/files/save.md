@@ -68,7 +68,7 @@ A working example of reading and writing a Dead Cells save file is available in 
 
 ### Payload
 
-The payload is a Zlib-compressed blob that contains the actual save file - some of them are [hxbit](https://github.com/HeapsIO/hxbit) serialised data, and others are just raw bits and pieces. They follow the order of the data chunk flags that were set previously - basically, if a data chunk flag was `1`, then the chunk is present in the save file. The payload is compressed with Zlib level 9 (maximum) compression. To manipulate it, read it as follows:
+The payload is a Zlib-compressed blob that contains the actual save file - some of them are [hxbit](https://github.com/HeapsIO/hxbit) serialised data, and others are just raw bits and pieces. They follow the order of the data chunk flags that were set previously - basically, if a data chunk flag was `1`, then the chunk is present in the save file. The game writes saves with Zlib level 9 (maximum) compression, but will read saves compressed at any level. To manipulate it, read it as follows:
 
 - Decompress the payload (it has headers, so any stock zlib implementation can handle it)
 - Figure out how many data chunks are enabled
@@ -111,8 +111,17 @@ This data is serialised with help from [hxbit](https://github.com/HeapsIO/hxbit)
 
 See the [full page](./hxbit) for format specs.
 
-## Additional notes about saves from the mobile version
+## Cross-platform save conversion
 
-The chunks `S_Game` and `S_UserAndGameData` cannot be copied from a PC save to a mobile save, because mobile has no implementation of the Twitch integration features; those Twitch features are always referenced in those two chunks on a PC save even when they have not been activated, leading to a crash when trying to pass them on the mobile version.
+The chunks `S_Game` and `S_UserAndGameData` cannot be copied from a PC save to a save for other platforms, because they have no implementation of the Twitch integration features; those Twitch features are always referenced in those two chunks on a PC save even when they have not been activated, leading to a crash when trying to pass them on to other versions.
 
-However, the `S_User` chunk, which contains the meta progress of the save (including unlocked items), can be passed from a PC save to a mobile save.
+However, the `S_User` chunk, which contains the meta progress of the save (including unlocked items), can always be passed. A simple technique to convert a save file from one platform to another is to:
+ 1. unpack the source save file and isolate the `S_User` chunk;
+ 2. unpack a save file from the destination platform, which will provide the right header information;
+ 3. replace the destination `S_User` chunk with the source one;
+ 4. optional: delete both the `S_Game` and `S_UserAndGameData` chunks in the destination save to force a new run;
+ 5. repack the destination save.
+
+This method requires starting a new run from the menu, since the in-progress run data is not transferred and thus out of sync.
+
+An online implementation can be found [here](https://labare.eu/DeadCells/SaveAlchemist/).
