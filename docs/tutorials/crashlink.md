@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 
-# Using crashlink
+# Using crashlink to manipulate game code
 
 crashlink is a new HashLink bytecode Swiss Army knife that allows you to easily (and programatically) load, save, modify, patch, decompile, and otherwise poke at compiled Haxe in HashLink. This page serves as a brief overview of how to install, run, and use crashlink intuitively on your computer.
 

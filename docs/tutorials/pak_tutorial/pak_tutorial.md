@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Unpacking and Repacking Game Files
+# Unpacking and modifying game assets
 
 This guide serves to provide a very basic guide to unpacking and repacking the game's asset files (contained in `res.pak`).
 
