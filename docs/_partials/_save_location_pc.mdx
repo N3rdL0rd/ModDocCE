@@ -1,0 +1,17 @@
+#### Steam
+
+First, check whether Steam Cloud sync is enabled for Dead Cells:
+
+1. In your Steam Library, right-click Dead Cells → **Properties** → **General** tab.
+2. Check the **Steam Cloud** setting (this is also sometimes shown under the game's in-game **Gameplay** settings).
+
+If Steam Cloud is disabled: Right-click Dead Cells → **Manage** → **Browse local files**. Your save files are in the local save folder shown there.
+
+If Steam Cloud is enabled: The local save folder shown by **Browse local files** is only a local backup and may be stale. Instead, use the Steam Cloud sync directory:
+
+1. From the game's local files folder, go up three directories to reach your Steam installation root.
+2. Navigate to `userdata/<your Steam ID3>/588650/remote/`.
+
+#### GOG
+
+The GOG release stores saves under your installation directory in `GOG Galaxy/Games/Dead Cells/save/`. GOG Galaxy's own cloud sync (if enabled) is not currently confirmed to use a different path - check both the install directory and your GOG Galaxy cloud sync settings if your save doesn't appear up to date.

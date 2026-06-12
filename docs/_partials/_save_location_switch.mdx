@@ -1,0 +1,17 @@
+#### Emulator users
+
+If you're running Dead Cells in Ryujinx, this is trivial: right-click the game in your game list and select **Open Save Data Location** (or **View user save folder**, depending on your Ryujinx version). The save files will be loose on disk and ready to use however you need.
+
+#### Real hardware
+
+Nintendo does not provide any official, user-facing way to export save data as files.
+
+This means that **getting a raw save file off a real Switch requires custom firmware (CFW)**. There is currently no homebrew-free method that produces a parseable file.
+
+If your Switch is already set up with a CFW like Atmosphere, the rest of this process is quick. If it isn't, setting up CFW is outside the scope of this doc - there are many existing guides for this depending on your console's hardware revision and firmware version, and the process changes often enough that reproducing it here would go stale quickly.
+
+1. **Install a save manager homebrew app.** [JKSV](https://github.com/J-D-K/JKSV) is the standard tool for this and is actively maintained. [Checkpoint](https://github.com/BernardoGiordano/Checkpoint) is a similar alternative if JKSV doesn't work for you.
+2. **Launch JKSV** from the Homebrew Menu.
+3. **Find Dead Cells** in the title list (it's sorted by icon/name, so just scroll to it).
+4. **Export the save.** Select the title, then choose to back up / export the save data. JKSV will write the save folder contents to your SD card, typically under `/JKSV/<game title>/<backup name>/`.
+5. **Copy the exported folder** off the SD card to your PC.

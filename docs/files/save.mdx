@@ -2,6 +2,8 @@
 sidebar_position: 3
 ---
 
+import ObtainingSaveFiles from '../_partials/_obtaining_save_files.mdx';
+
 # Save Files
 
 This is Dead Cells' specific binary save file format. It stores multiple serialised objects in a compressed format along with hashes to prevent corruption or tampering.
@@ -113,7 +115,7 @@ See the [full page](./hxbit) for format specs.
 
 ## Cross-platform save conversion
 
-The chunks `S_Game` and `S_UserAndGameData` cannot be copied from a PC save to a save for other platforms, because they have no implementation of the Twitch integration features; those Twitch features are always referenced in those two chunks on a PC save even when they have not been activated, leading to a crash when trying to pass them on to other versions.
+The chunks `S_Game` and `S_UserAndGameData` cannot be copied from a PC save to a save for other platforms, because they have no implementation of the Twitch integration features; those Twitch features are always referenced in those two chunks on a PC save even when they have not been activated, leading to a crash when trying to parse them on to other versions.
 
 However, the `S_User` chunk, which contains the meta progress of the save (including unlocked items), can always be passed. A simple technique to convert a save file from one platform to another is to:
  1. unpack the source save file and isolate the `S_User` chunk;
@@ -124,4 +126,8 @@ However, the `S_User` chunk, which contains the meta progress of the save (inclu
 
 This method requires starting a new run from the menu, since the in-progress run data is not transferred and thus out of sync.
 
-An online implementation can be found [here](https://labare.eu/DeadCells/SaveAlchemist/).
+An online implementation can be found [here](https://labare.eu/DeadCells/SaveAlchemist/), which is mirrored in the CLI version of `savetool` in alivecells.
+
+## Obtaining save files on different platforms
+
+<ObtainingSaveFiles />
