@@ -6,7 +6,7 @@ sidebar_position: 6
 
 :::info Heads up!
 
-This page is still very much a work-in-progress. As you can see, I was too lazy to even finish writing the hlmod section. I've almost certainly 
+This page is still very much a work-in-progress.
 
 :::
 
@@ -72,4 +72,9 @@ There are more that I haven't had a chance to list here yet, so let me know if I
 
 ### hlmod
 
-Todo! Bug n3rdl0rd about this in the Discord if you want this to get written sooner.
+[GitHub](https://github.com/N3rdL0rd/hlmod) - [Nightly builds](https://nightly.link/N3rdL0rd/hlmod/workflows/nightly/main)
+
+A generic Hashlink modding framework powered by Python, and the spiritual successor to [pyhl](https://github.com/N3rdL0rd/crashlink/tree/main/pyhl). Where DCCM is purpose-built for Dead Cells, hlmod aims to work across any Hashlink game. Very early in development, but any help is welcome!
+
+- [dcmod](https://github.com/N3rdL0rd/hlmod/tree/main/mods/dcmod) by N3rdL0rd
+  - The core Dead Cells base mod for hlmod. Currently it mostly provides quality-of-life hooks that mirror debug functionality written for DCCM.
