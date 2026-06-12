@@ -49,7 +49,7 @@ Some DCCM mods are bundled for distribution on the Steam Workshop, and if they a
 
 ### Dead Cells Core Modding (DCCM)
 
-[Docs](https://dead-cells-core-modding.github.io/docs/docs/) - [GitHub org](github.com/dead-cells-core-modding/)
+[Docs](https://dead-cells-core-modding.github.io/docs/docs/) - [GitHub org](https://github.com/dead-cells-core-modding/)
 
 The first real modloader and modding framework for a Hashlink game, or, for that matter, for Dead Cells. Written by HKLab in C#, runs on the .NET VM.
 
