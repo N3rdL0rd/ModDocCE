@@ -1,0 +1,17 @@
+### Emulator users
+
+If you're running Dead Cells in [shadPS4](https://shadps4.net/), your save file is stored under the emulator's data directory at `home/<user-id>/savedata/<title-id>/SAVEDATA00/` (on Linux this is typically `~/.local/share/shadPS4/home/1000/savedata/CUSA10484/SAVEDATA00/`; on Windows, look under `%appdata%/shadPS4/`). Inside, `user_0.dat` is the actual save data, alongside `options.json` and the `sce_sys`/`sce_backup` directories that real PS4 hardware also produces.
+
+:::note
+`CUSA10484` is the title ID observed for one regional release of Dead Cells - other regions may use a different `CUSA*****` ID. If your save isn't under that folder, check for other `CUSA*` directories under `savedata/`.
+:::
+
+### Real hardware
+
+On real PS4/PS5 hardware, save data lives in the same layout as above: `/user/home/<user-id>/savedata/<title-id>/<savedata-dir>/`, with the encrypted save container under that folder's `sce_sys/` directory.
+
+**Official method (no jailbreak required):** In the system Settings, go to **Application Saved Data Management** → **Saved Data in System Storage** → select Dead Cells → **Copy to USB Storage Device**. This writes the save to `PS4/SAVEDATA/<user-id>/<title-id>/` on the USB drive, but the files are encrypted and signed to your account/console - they can't be read or edited directly without further decryption.
+
+**Jailbroken console (CFW like GoldHEN):** Enable the FTP server (Settings → GoldHEN → Enable FTP server) and connect to browse `/user/home/<user-id>/savedata/<title-id>/` directly - this mirrors the same folder layout as the shadPS4 save above. Homebrew tools like [Apollo Save Tool](https://consolemods.org/wiki/PS4:Apollo_Save_Tool) can also export already-decrypted save files directly on-console.
+
+PS5 jailbreaks are much more limited and firmware-dependent; if you've confirmed an equivalent process there, contributions to this doc are welcome.
