@@ -6,8 +6,45 @@ import ObtainingSaveFiles from '../../_partials/_obtaining_save_files.mdx';
 
 # Converting a save file between platforms
 
+[Save Alchemist](https://labare.eu/DeadCells/SaveAlchemist/) is a web-based Dead Cells save converter. It can transfer your overall progress and unlocks from one platform to another - for example, moving a Steam save to mobile, or a Switch save to PC.
+
+Because some run-specific data is not compatible between platforms, the conversion **resets your current run** and places you back in the Prisoners' Quarters. Your meta-progression (unlocks, cells, custom mode settings, etc.) is preserved.
+
 ## Getting your save files
 
-To convert a save between platforms, you'll need a copy of the save file from your source platform, and a copy of a save file from the destination platform (to provide the right header information). How to get a save file depends on your platform:
+To convert a save between platforms, you'll need two files:
+
+1. The save file from your **source** platform (the one with the progress you want to keep).
+2. A save file from your **destination** platform (this provides the correct header/format for the target platform and will be overwritten).
+
+How to get a save file depends on your platform:
 
 <ObtainingSaveFiles />
+
+## Preparing a destination save
+
+The destination save file will be **completely overwritten**, so use an empty slot rather than an in-progress run you care about.
+
+To create a valid empty destination save:
+
+1. On the destination platform, start Dead Cells.
+2. Pick an empty save slot.
+3. Start a run and possess the body in the Prisoners' Quarters.
+4. Quit back to the main menu.
+5. Copy that save file (`user_X.dat`) off the destination platform.
+
+## Converting the save
+
+1. Open [Save Alchemist](https://labare.eu/DeadCells/SaveAlchemist/) in a web browser.
+2. Under **Source save**, upload the save file from the platform you are converting *from*.
+3. Under **Destination save**, upload the empty save file from the platform you are converting *to*.
+4. Click **Convert**.
+5. Download the converted save file and copy it back to the destination platform's save location, replacing the empty destination save.
+
+The file you need to replace is named `user_X.dat`, where `X` is the slot number (`0` for slot 1, `1` for slot 2, and so on up to `6` for slot 7).
+
+:::tip
+
+Always keep a backup of your original destination save before overwriting it, in case anything goes wrong.
+
+:::

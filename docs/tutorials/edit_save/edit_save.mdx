@@ -11,3 +11,60 @@ import ObtainingSaveFiles from '../../_partials/_obtaining_save_files.mdx';
 Before you can edit anything, you'll need a copy of your save file. How to get one depends on your platform:
 
 <ObtainingSaveFiles />
+
+## Opening the save tool
+
+The easiest way to edit a save file is with [savetool's web app](https://n3rdl0rd.github.io/alivecells/savetool/web/), part of the `alivecells` project. It runs entirely in your browser (via [Pyodide](https://pyodide.org/)) - nothing is uploaded anywhere, so it's safe to use with your real saves.
+
+Open the page, wait for it to say `ready!` in the status bar at the bottom, then click **Open save file** and pick your `user_0.dat` (or equivalent). If the file loads successfully, the status bar will tell you whether its checksum is `ok` or `INVALID` - a fresh, unmodified save should always say `ok`. Don't worry about the checksum yourself; savetool recalculates it automatically whenever you download an edited save.
+
+:::tip
+
+If you'd rather work from the command line, the same editing features are available via `savetool.py edit <save_file>`, run from the [`savetool`](https://github.com/N3rdL0rd/alivecells/tree/main/savetool) directory of `alivecells`. Everything below applies to both.
+
+:::
+
+## Layout
+
+Once a save is loaded, a row of tabs appears across the top of the page - one **Header** tab, plus one tab per chunk found in the save. Each chunk tab is labelled with the chunk's name (eg `S_User`) and a badge showing its type. A red badge means the chunk failed to parse entirely, and a yellow one means it parsed with warnings - you can still view and edit chunks with warnings, but proceed carefully.
+
+### Header
+
+The Header tab shows the save's format version, the game's git commit hash and build date, and its checksum status. It also lists the save's [feature flags](../../files/save.mdx#flags) as checkboxes - these record things like whether the save was made with experimental features or mods enabled. Edit any of these fields and click **make it so!** to stage the change.
+
+### Date and version chunks
+
+If present, `S_Date` and `S_VersionNumber` get their own simple tabs - a date/time field (in `YYYY-MM-DD HH:MM:SS` local time) and a game version number, respectively. Edit the value and click **make it so!**.
+
+### DLC chunk
+
+The `S_DLCMask` tab lists each DLC as a checkbox. Tick or untick the ones you want to own (or not), then click **make it so!**.
+
+### hxbit chunks (S_User, S_Game, S_UserAndGameData)
+
+These chunks hold most of your actual progress and are [hxbit](../../files/hxbit.md)-serialised, so their tab shows a tree view on the left and a detail pane on the right.
+
+- Click the **▶** next to a node to expand it and browse its fields. Large lists are paginated - click "more nodes!" to load further entries.
+- Click a node to select it and view its details in the right-hand pane.
+- If the selected node is a simple scalar value (a string, number, boolean, or `None`), the detail pane shows an editable field. Change the **Value** and, if needed, the **Type** dropdown (ints can be entered as decimal or hex, eg `0x2a`; booleans accept `true`/`false`, `yes`/`no`, `on`/`off`, or `1`/`0`), then click **make it so!**.
+- Nodes that aren't simple scalars (objects, lists, dicts) show a read-only summary instead. For these you can click **Show schemas** to see the underlying hxbit class and schema definitions, which can help when you're trying to figure out what a field actually represents.
+
+:::warning
+
+`S_Game` and `S_UserAndGameData` contain in-progress run data tied to the current session - editing these incorrectly is more likely to produce a save that crashes the game than editing `S_User`. If you just want to change unlocks, gold, cells, or other meta-progression, stick to `S_User`.
+
+:::
+
+### Other chunks
+
+Any chunk type savetool doesn't have a dedicated editor for (or one that failed to parse) is shown as a read-only hex dump, so you can at least inspect its raw contents.
+
+## Saving your changes
+
+Once you're happy with your edits, click **Download edited save** at the top of the page. This repacks every chunk (recalculating the checksum for you) and downloads the result as `edited_<original filename>`. Replace your original save file with this one - see [Obtaining save files on different platforms](../../files/save.mdx#obtaining-save-files-on-different-platforms) for where it needs to go for your platform.
+
+:::tip
+
+Keep a backup of your original save file before overwriting it, in case an edit produces a save the game refuses to load.
+
+:::
